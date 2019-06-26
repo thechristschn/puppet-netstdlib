@@ -4,14 +4,10 @@ module IPAddrSubnetExtension
   end
 end
 
-module Puppet::Parser::Functions
+# Converts an CIDR address of the form 192.168.0.1/24 into its netmask.
+Puppet::Functions.create_function(:cidr_to_netmask) do
 
-  newfunction(:cidr_to_netmask, :type => :rvalue, :doc => <<-'ENDHEREDOC'
-    Converts an CIDR address of the form 192.168.0.1/24 into its netmask.
-
-    ENDHEREDOC
-    ) do |args|
-
+  def cidr_to_netmask(*args)
     unless args.length == 1 then
       raise Puppet::ParseError, ("cidr_to_netmask(): wrong number of arguments (#{args.length}; must be 1)")
     end

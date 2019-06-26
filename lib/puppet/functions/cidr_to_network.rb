@@ -1,11 +1,7 @@
-module Puppet::Parser::Functions
+# Converts an CIDR address of the form 192.168.0.1/24 into its network address
+Puppet::Functions.create_function(:cidr_to_network) do
 
-  newfunction(:cidr_to_network, :type => :rvalue, :doc => <<-'ENDHEREDOC'
-    Converts an CIDR address of the form 192.168.0.1/24 into its network address
-
-    ENDHEREDOC
-    ) do |args|
-
+  def cidr_to_network(*args)
     unless args.length == 1 then
       raise Puppet::ParseError, ("cidr_to_network(): wrong number of arguments (#{args.length}; must be 1)")
     end
